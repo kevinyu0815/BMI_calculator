@@ -1,0 +1,164 @@
+*, body {
+    font-family: "PingFangTC-Regular", "Microsoft JhengHei", sans-serif;
+    box-sizing: border-box;
+}
+
+/* Wrap */
+.wrap {
+    margin: auto;
+    max-width: 1024px;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.header{
+    display: flex;
+    align-items: center;
+    height: 300px;
+    background-color: #424242;
+    /* padding: 74px 173px; */
+}
+/* logo */
+.logo{
+    margin-right: 97px;
+    margin-left: 173px;
+}
+/* input */
+.input{
+    margin-right: 53px;
+}
+.input label{
+    display: block;
+    color: #FFD366;
+    font-size: 18px;
+    margin-bottom: 7px;
+}
+.input input{
+    display: block;
+    color: white;
+    background: rgba(255,255,255,0.18);
+    border: 2px solid #FFD366;
+    border-radius: 10px;
+    outline: none;
+    width: 250px;
+    font-size: 24px;
+    padding: 3px 14px;
+}
+.input input::placeholder{
+    color: rgba(255,255,255,0.50);
+}
+.input input.height{
+    margin-bottom: 23px;
+}
+/* button */
+.btn{
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    background-color: #FFD366;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    font-size: 24px;
+    color: #424242;
+}
+.btn:hover{
+    box-shadow: 0 1px 6px 3px rgba(255,196,50,0.64);
+}
+.btn:active{
+    background-color:  #DEA821;
+}
+/* result */
+.result{
+    display: none;
+    align-items: center;
+}
+.result_num{
+    position: relative;
+    /* transition: 0.2s ease-in-out; */
+    border: 6px solid #86D73F;
+    border-radius: 50%;
+    width: 125px;
+    height: 125px;
+    /* 要改 */
+    padding-top: 41px;
+    text-align: center;
+    font-size: 32px;
+    color: #86D73F;
+}
+.result_num .word{
+    font-size: 14px;
+    padding-top: 5px;
+}
+.result_num .btn_refresh{
+    /* transition: 0.2s ease-in-out; */
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 35px;
+    height: 35px;
+    background: #86D73F;
+    border: 3px solid #424242;
+    border-radius: 50%;
+}
+.result_name{
+    font-size: 32px;
+    color: #86D73F;
+    margin: 0 15px;
+}
+
+/* 不同BMI的顏色不同 */
+.result.light>*{
+    color: #31BAF9;
+    border-color: #31BAF9;
+}
+.result.light .btn_refresh{
+    background-color: #31BAF9;
+}
+.result.normal>*{
+    color: #86D73F;
+    border-color: #86D73F;
+}
+.result.normal .btn_refresh{
+    background-color: #86D73F;
+}
+.result.over>*{
+    color: #FF982D;
+    border-color: #FF982D;
+}
+.result.over .btn_refresh{
+    background-color: #FF982D;
+}
+.result.fat>*{
+    color: #FF6C03;
+    border-color: #FF6C03;
+}
+.result.fat .btn_refresh{
+    background-color: #FF6C03;
+}
+.result.toofat>*{
+    color: #FF1200;
+    border-color: #FF1200;
+}
+.result.toofat .btn_refresh{
+    background-color: #FF1200;
+}
+
+
+
+/* Main */
+.main{
+    height: 300px;
+}
+
+/* Footer */
+.footer{
+    background-color: #FFD366;
+    padding: 18px 0px;
+    text-align: center;
+}
