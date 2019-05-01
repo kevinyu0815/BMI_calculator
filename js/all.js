@@ -1,10 +1,15 @@
+// 輸入框元素
 var input_h = document.querySelector(".height");
 var input_w = document.querySelector(".weight");
+// 按鈕元素
 var btn_result = document.querySelector(".btn");
 var btn_refresh = document.querySelector(".btn_refresh");
+// 結果元素
 var result = document.querySelector(".result");
 var result_name = document.querySelector(".result_name");
 var result_bmi = document.querySelector(".result .bmi");
+// 紀錄元素
+
 
 // 一次綁事件在多個元素?
 btn_result.addEventListener("click", compute);
@@ -16,6 +21,7 @@ btn_refresh.addEventListener("click", compute);
 // })
 
 
+// 計算BMI的 function
 function compute() {
     var height = input_h.value;
     var weight = input_w.value;
@@ -37,6 +43,17 @@ function compute() {
     result.style.display = "flex";
     result_bmi.textContent = bmi;
 }
+
+// 更新紀錄顯示的 function
+function update(){
+    
+}
+
+
+
+
+
+
 
 // BMI範圍對照表
 var range = [
