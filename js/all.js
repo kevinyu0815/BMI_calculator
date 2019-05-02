@@ -1,6 +1,5 @@
 // 輸入框元素
-var input_h = document.querySelector(".height");
-var input_w = document.querySelector(".weight");
+var inputs = document.querySelectorAll("input");
 // 按鈕元素
 var btn_result = document.querySelector(".btn");
 var btn_refresh = document.querySelector(".btn_refresh");
@@ -12,25 +11,29 @@ var result_bmi = document.querySelector(".result .bmi");
 var record_container = document.querySelector(".record-container");
 
 
-// 一次綁事件在多個元素?
 btn_result.addEventListener("click", compute);
 btn_refresh.addEventListener("click", compute);
-// inputs.forEach(function(input){
-//     input.addEventListener("keypress", function(e){
-//         if(e.keyCode == "13") compute();
-//     });
-// })
+// 一次綁事件在多個元素
+inputs.forEach(function (input) {
+    input.addEventListener("keypress", function (e) {
+        if (e.keyCode == "13") compute();
+    });
+});
 
 
 // 計算BMI的 function
 var recordsData = JSON.parse(localStorage.getItem("records")) || [];
 function compute() {
-    var height = input_h.value;
-    var weight = input_w.value;
+    var height = inputs[0].value;
+    var weight = inputs[1].value;
+    // 若沒輸入東西或輸入非數字、則不會執行後續
+    if (height == "" || weight == "" || isNaN(height) || isNaN(weight)) return;
+    // console.log(isNaN(height), isNaN(weight));
+
     var bmi = (weight / Math.pow(height / 100, 2)).toFixed(2);  //四捨五入至小數第二位
     var name = "";
     var className = "normal";
-    var date = "06-19-2017"
+    var date = get_nowDate();
 
     //清除其他體重範圍的class
     range.forEach(e => result.classList.remove(e.class));
@@ -62,7 +65,7 @@ function compute() {
     // 新增element 在array第一筆
     recordsData.unshift(data);
     localStorage.setItem("records", JSON.stringify(recordsData));
-    console.log(recordsData);
+    // console.log(recordsData);
 
     // 更新畫面
     update();
@@ -80,18 +83,16 @@ function update() {
         h = recordsData[i].height;
         d = recordsData[i].date;
 
-        str += getRecordHTML(c,n,b,w,h,d);
+        str += getRecordHTML(c, n, b, w, h, d);
     }
     record_container.innerHTML = str;
-    
 }
-console.log(recordsData);
 // 如果沒有資料，不會更新
 if (recordsData.length != 0) update();
 
 
 // 取得record的html的 function
-function getRecordHTML(className, name, bmi, weight, height, date){
+function getRecordHTML(className, name, bmi, weight, height, date) {
     var html = `<div class="record ${className}">
         <div class="record-name">${name}</div>
         <div class="record-detail">
@@ -111,9 +112,7 @@ function getRecordHTML(className, name, bmi, weight, height, date){
     return html;
 }
 
-
-
-// BMI範圍對照表
+// BMI範圍對照表 物件
 var range = [
     { name: "過輕", class: "light", lower: 0, upper: 18.5 },
     { name: "理想", class: "normal", lower: 18.5, upper: 25 },
@@ -123,3 +122,13 @@ var range = [
     { name: "嚴重肥胖", class: "toofat", lower: 40, upper: Infinity }
 ];
 
+// 取得現在時間，月-日-年 的格式 
+function get_nowDate() {
+    var dateObj = new Date();
+    var y = dateObj.getFullYear();
+    // 月和日若不到兩位數會在開頭補0：開頭加0並用slice(-2)切出最後兩個數
+    var m = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+    var d = ("0" + dateObj.getDate()).slice(-2);
+    var date = `${m}-${d}-${y}`;
+    return date;
+}
